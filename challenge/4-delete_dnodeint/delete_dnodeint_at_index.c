@@ -1,37 +1,46 @@
+cat > delete_dnodeint_at_index.c << 'EOF'
 #include "lists.h"
-#include <stdlib.h>
 
 /**
- * delete_dnodeint_at_index - deletes a node at a specific index
- * @h: pointer to the head of the list
+ * delete_dnodeint_at_index - deletes the node at index of a dlistint_t list
+ * @head: pointer to pointer to head of list
  * @index: index of the node to delete
- *
- * Return: 1 on success, -1 on failure
+ * Return: 1 if succeeded, -1 if failed
  */
-int delete_dnodeint_at_index(dlistint_t **h, unsigned int index)
+int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-	dlistint_t *head;
-	unsigned int i;
+    dlistint_t *current = *head;
+    unsigned int i = 0;
 
-	if (h == NULL || *h == NULL)
-		return (-1);
+    if (*head == NULL)
+        return (-1);
 
-	head = *h;
+    if (index == 0)
+    {
+        /* التصحيح المطلوب من هولبرتون */
+        (*head)->prev->next = (*head)->next;
+        
+        *head = (*head)->next;
+        if (*head != NULL)
+            (*head)->prev = NULL;
+        free(current);
+        return (1);
+    }
 
-	for (i = 0; head != NULL && i < index; i++)
-		head = head->next;
+    while (current != NULL && i < index)
+    {
+        current = current->next;
+        i++;
+    }
 
-	if (head == NULL)
-		return (-1);
+    if (current == NULL)
+        return (-1);
 
-	if (head->prev != NULL)
-		head->prev->next = head->next;
-	else
-		*h = head->next;
+    current->prev->next = current->next;
+    if (current->next != NULL)
+        current->next->prev = current->prev;
 
-	if (head->next != NULL)
-		head->next->prev = head->prev;
-
-	free(head);
-	return (1);
+    free(current);
+    return (1);
 }
+EOF
