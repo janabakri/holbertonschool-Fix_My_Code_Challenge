@@ -9,7 +9,6 @@
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
     dlistint_t *current = *head;
-    dlistint_t *temp;
     unsigned int i = 0;
 
     if (*head == NULL)
@@ -17,6 +16,8 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 
     if (index == 0)
     {
+        (*head)->prev->next = (*head)->next;
+        
         *head = (*head)->next;
         if (*head != NULL)
             (*head)->prev = NULL;
@@ -33,7 +34,6 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
     if (current == NULL)
         return (-1);
 
-    /* التصحيح المطلوب */
     current->prev->next = current->next;
     if (current->next != NULL)
         current->next->prev = current->prev;
