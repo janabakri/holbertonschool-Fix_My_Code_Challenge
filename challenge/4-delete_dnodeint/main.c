@@ -8,7 +8,6 @@
 int main(void)
 {
     dlistint_t *head = NULL;
-    dlistint_t *new;
     int i;
 
     for (i = 0; i < 5; i++)
