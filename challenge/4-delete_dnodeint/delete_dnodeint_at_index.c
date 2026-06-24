@@ -17,11 +17,9 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 
     if (index == 0)
     {
-        /* السطر المطلوب من هولبرتون */
-        (*head)->prev->next = (*head)->next;
+        /* التصحيح المطلوب من هولبرتون */
+        (*head)->prev->next = (*head)->next;  /* <--- هذا السطر بالضبط */
         
-        /* نأخذ نسخة من current قبل التعديل */
-        current = *head;
         *head = (*head)->next;
         if (*head != NULL)
             (*head)->prev = NULL;
