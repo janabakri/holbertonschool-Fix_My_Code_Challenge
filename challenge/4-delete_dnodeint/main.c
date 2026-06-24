@@ -1,13 +1,14 @@
 #include "lists.h"
 
 /**
- * main - check the code
+ * main - check the code for Holberton School students.
  *
  * Return: Always 0.
  */
 int main(void)
 {
     dlistint_t *head = NULL;
+    dlistint_t *new;
     int i;
 
     for (i = 0; i < 5; i++)
@@ -45,6 +46,19 @@ int main(void)
 
     delete_dnodeint_at_index(&head, 0);
     print_dlistint(head);
+    printf("-----------------\n");
+
+    delete_dnodeint_at_index(&head, 0);
+    print_dlistint(head);
+    printf("-----------------\n");
+
+    delete_dnodeint_at_index(&head, 0);
+    print_dlistint(head);
+    printf("-----------------\n");
+
+    delete_dnodeint_at_index(&head, 0);
+    print_dlistint(head);
+    printf("-----------------\n");
 
     free_dlistint(head);
     return (0);
